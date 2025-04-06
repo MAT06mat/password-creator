@@ -1,0 +1,78 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.subtitle {
+  padding: 2em;
+  color: #888;
+}
+
+.password {
+  border-radius: 8px;
+  width: 100%;
+  max-width: 15em;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #f9f9f9;
+  border: 1px solid;
+  cursor: pointer;
+  resize: none;
+  overflow-y: hidden;
+  scroll-padding-block: 0;
+}
+
+.rule-container {
+  margin: auto;
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  max-width: 25em;
+}
+
+.rule {
+  display: grid;
+  transition: all ease-in-out 0.6s;
+  background-color: #ffb3b3;
+  border: 2px solid #ff4b4b;
+  border-radius: 1em;
+  text-align: left;
+}
+
+.wrapped-rule {
+  overflow-y: hidden;
+}
+
+.rule.completed {
+  background-color: #c6ffb3;
+  border: 2px solid #70d233;
+}
+
+.rule h3 {
+  margin: 0;
+  margin-bottom: 0.4em;
+}
+
+.rule p {
+  margin: 0;
+}
+
+.captcha {
+  margin: 1em 0;
+  display: flex;
+  gap: 1em;
+}
+
+.captcha canvas {
+  border-radius: 8px;
+}
+
+.captcha button {
+  height: 50px;
+  width: 50px;
+  padding: 5px;
+}
