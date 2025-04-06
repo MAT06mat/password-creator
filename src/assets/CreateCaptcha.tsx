@@ -1,5 +1,5 @@
 import { Captcha } from "navid-react-captcha-generator";
-import Refresh from "./refresh.tsx";
+import Refresh from "./Refresh.tsx";
 import { useState } from "react";
 
 function CreateCaptcha({
