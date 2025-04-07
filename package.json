@@ -2,11 +2,11 @@
     "name": "password-creator",
     "private": true,
     "version": "1.0.0",
-    "homepage": "https://mat06mat.github.io/password-creator",
+    "homepage": "./",
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "tsc -b && vite build",
+        "build": "tsc -b && vite build --base=./",
         "lint": "eslint .",
         "preview": "vite preview",
         "predeploy": "npm run build",
