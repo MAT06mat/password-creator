@@ -11,6 +11,7 @@
 }
 
 .password {
+  white-space: anywhere;
   border-radius: 8px;
   width: 100%;
   max-width: 22.5em;
