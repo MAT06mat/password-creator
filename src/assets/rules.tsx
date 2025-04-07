@@ -5,6 +5,16 @@ import { CHARSETS } from "./charsets";
 let captchaValue = "qpzfhnsdk";
 let captchaFixed = false;
 
+const rbob = Math.round(Math.random() * 2);
+let bob = "";
+if (rbob === 0) {
+    bob = "¯\\_(ツ)_/¯";
+} else if (rbob === 1) {
+    bob = "(╯°□°)╯︵┻┻";
+} else {
+    bob = "┬─┬ノ( º _ ºノ)";
+}
+
 function getCaptchaFixed() {
     return captchaFixed;
 }
@@ -122,6 +132,18 @@ const rules = [
         },
     },
     {
+        text: "Password must contain at least one Roman numeral",
+        condition: (text: string) => {
+            let haveRomanNumeral = false;
+            forEachChar(text, (char) => {
+                if (CHARSETS.romanNumeral.includes(char)) {
+                    haveRomanNumeral = true;
+                }
+            });
+            return haveRomanNumeral;
+        },
+    },
+    {
         text: "The password must contain as many lowercase and uppercase characters",
         condition: (text: string) => {
             let upper = 0;
@@ -149,27 +171,20 @@ const rules = [
         },
     },
     {
-        text: "Password must contain at least one Roman numeral",
-        condition: (text: string) => {
-            let haveRomanNumeral = false;
-            forEachChar(text, (char) => {
-                if (CHARSETS.romanNumeral.includes(char)) {
-                    haveRomanNumeral = true;
-                }
-            });
-            return haveRomanNumeral;
-        },
-    },
-    {
         text: "The password must contain pi",
         condition: (text: string) => {
             return text.includes(CHARSETS.pi);
         },
     },
     {
+        text: "The password must contain an emoji",
+        condition: (text: string) => {
+            return containEmojis(text);
+        },
+    },
+    {
         text: "The password must contain the captcha",
         condition: (text: string) => {
-            return true; // TO REMOVE
             if (text.includes(captchaValue)) {
                 captchaFixed = true;
                 return true;
@@ -184,16 +199,15 @@ const rules = [
         ),
     },
     {
-        text: "The password must contain an emoji",
-        condition: (text: string) => {
-            return true;
-            return containEmojis(text);
-        },
-    },
-    {
         text: "The sum of all Roman numerals must be equal to 42",
         condition: (text: string) => {
             return sumRomanInString(text) == 42;
+        },
+    },
+    {
+        text: `The password must contain bob ${bob}`,
+        condition: (text: string) => {
+            return text.includes(bob);
         },
     },
 ];

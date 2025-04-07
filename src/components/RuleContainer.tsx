@@ -49,15 +49,6 @@ function RuleContainer({ passwordText }: Props) {
         }
     }
 
-    displayRules.sort((a, b) => {
-        if (a.completed === b.completed) {
-            return 0;
-        } else if (a.completed) {
-            return 1;
-        }
-        return -1;
-    });
-
     return (
         <div className="rule-container">
             <AnimatePresence>
