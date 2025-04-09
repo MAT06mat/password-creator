@@ -2,10 +2,10 @@ import React, { ReactNode } from "react";
 import { motion } from "framer-motion";
 
 interface Props {
-    number: number;
-    text: string;
+    number?: number;
+    text?: string;
     children: ReactNode;
-    completed: boolean;
+    completed?: boolean;
 }
 
 const Rule = React.memo(({ number, text, children, completed }: Props) => {

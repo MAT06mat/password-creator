@@ -1,13 +1,14 @@
 import CreateCaptcha from "./CreateCaptcha";
+import { q1, q2, q3 } from "./Quiz";
 import { containEmojis, count, forEachChar } from "./tools/chars";
 import { CHARSETS } from "./tools/charsets";
-import { Randint, RandList } from "./tools/random";
+import { RandInt, RandList } from "./tools/random";
 import { sumRomanInString } from "./tools/roman";
 
 let captchaValue = "qpzfhnsdk";
 let captchaFixed = false;
 
-const totalDigits = Randint(20, 25);
+const totalDigits = RandInt(20, 25);
 const bob = RandList(["¯\\_(ツ)_/¯", "(╯°□°)╯︵┻┻", "┬─┬ノ( º _ ºノ)"]);
 
 const rules = [
@@ -127,6 +128,36 @@ const rules = [
         condition: (text: string) => {
             return text.includes(bob);
         },
+    },
+    {
+        condition: (text: string) => {
+            text = text.toLowerCase();
+            return (
+                text.includes(q1[1]) &&
+                text.includes(q2[1]) &&
+                text.includes(q3[1])
+            );
+        },
+        content: (
+            <>
+                <b>The password must contain answers of this quiz:</b>
+                <br />
+                <br />
+                <u>Question 1: </u>
+                <br />
+                {q1[0]}
+                <br />
+                <br />
+                <u>Question 2:</u>
+                <br />
+                {q2[0]}
+                <br />
+                <br />
+                <u>Question 3:</u>
+                <br />
+                {q3[0]}
+            </>
+        ),
     },
 ];
 

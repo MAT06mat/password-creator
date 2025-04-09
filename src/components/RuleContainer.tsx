@@ -4,7 +4,7 @@ import rules from "../assets/rules";
 import { AnimatePresence } from "framer-motion";
 
 interface rule {
-    text: string;
+    text?: string;
     condition: (text: string) => boolean;
     content?: ReactNode | undefined;
     number?: number;
@@ -20,7 +20,6 @@ function RuleContainer({ passwordText }: Props) {
 
     // Check if all rules are completed
     let isAllRulesCompleted = true;
-
     displayRules.forEach((rule: rule) => {
         rule.completed = rule.condition(passwordText);
         if (!rule.completed) {
@@ -55,10 +54,10 @@ function RuleContainer({ passwordText }: Props) {
                 {displayRules.map((rule: rule) => {
                     return (
                         <Rule
-                            number={rule.number ? rule.number : 0}
+                            number={rule.number}
                             text={rule.text}
-                            completed={rule.completed ? true : false}
-                            key={rule.number ? rule.number : 0}
+                            completed={rule.completed}
+                            key={rule.number}
                         >
                             {rule.content}
                         </Rule>
