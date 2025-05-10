@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 import Password from "./components/Password";
 import RuleContainer from "./components/RuleContainer";
@@ -6,6 +6,9 @@ import RuleContainer from "./components/RuleContainer";
 function App() {
     const [start, setStart] = useState(false);
     const [passwordText, setPasswordText] = useState("");
+    const passwordRef = useRef<HTMLTextAreaElement>(
+        document.createElement("textarea")
+    );
 
     function handlePassword(event: React.FormEvent<HTMLTextAreaElement>) {
         setPasswordText(event.currentTarget.value);
@@ -16,8 +19,14 @@ function App() {
             <h1>Password-Creator</h1>
             {start ? (
                 <>
-                    <Password handlePassword={handlePassword} />
-                    <RuleContainer passwordText={passwordText} />
+                    <Password
+                        handlePassword={handlePassword}
+                        ref={passwordRef}
+                    />
+                    <RuleContainer
+                        passwordText={passwordText}
+                        passwordRef={passwordRef}
+                    />
                 </>
             ) : (
                 <>
