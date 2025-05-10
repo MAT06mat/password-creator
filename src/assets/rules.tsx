@@ -1,74 +1,15 @@
 import CreateCaptcha from "./CreateCaptcha";
-import emojiRegex from "emoji-regex";
-import { CHARSETS } from "./charsets";
+import { q1, q2, q3 } from "./Quiz";
+import { containEmojis, count, forEachChar } from "./tools/chars";
+import { CHARSETS } from "./tools/charsets";
+import { RandInt, RandList } from "./tools/random";
+import { sumRomanInString } from "./tools/roman";
 
 let captchaValue = "qpzfhnsdk";
 let captchaFixed = false;
 
-const rbob = Math.round(Math.random() * 2);
-let bob = "";
-if (rbob === 0) {
-    bob = "¯\\_(ツ)_/¯";
-} else if (rbob === 1) {
-    bob = "(╯°□°)╯︵┻┻";
-} else {
-    bob = "┬─┬ノ( º _ ºノ)";
-}
-
-function getCaptchaFixed() {
-    return captchaFixed;
-}
-
-function onCaptchaValue(value: string) {
-    captchaValue = value;
-}
-
-function forEachChar(text: string, func: (char: string) => void) {
-    text.split("").forEach(func);
-}
-
-function containEmojis(text: string) {
-    const regex = emojiRegex();
-    return regex.test(text);
-}
-const romanMap = {
-    I: 1,
-    V: 5,
-    X: 10,
-    L: 50,
-    C: 100,
-    D: 500,
-    M: 1000,
-};
-
-function romanToInt(roman: string) {
-    let total = 0;
-    let prev = 0;
-    for (let i = roman.length - 1; i >= 0; i--) {
-        const current = romanMap[roman[i] as keyof typeof romanMap];
-        if (current < prev) {
-            total -= current;
-        } else {
-            total += current;
-        }
-        prev = current;
-    }
-    return total;
-}
-
-function sumRomanInString(str: string) {
-    const matches = str.match(/(I|V|X|L|C|D|M){1,}/g);
-    if (!matches) return 0;
-
-    return matches.reduce((sum, group) => {
-        try {
-            const value = romanToInt(group);
-            return sum + value;
-        } catch {
-            return sum;
-        }
-    }, 0);
-}
+const totalDigits = RandInt(20, 25);
+const bob = RandList(["¯\\_(ツ)_/¯", "(╯°□°)╯︵┻┻", "┬─┬ノ( º _ ºノ)"]);
 
 const rules = [
     {
@@ -78,19 +19,13 @@ const rules = [
         },
     },
     {
-        text: "The password must contain lowercase characters",
+        text: "The password must contain lowercase letter",
         condition: (text: string) => {
-            let haveLowercase = false;
-            forEachChar(text, (char) => {
-                if (CHARSETS.lowercase.includes(char)) {
-                    haveLowercase = true;
-                }
-            });
-            return haveLowercase;
+            return count(text, CHARSETS.lowercase) != 0;
         },
     },
     {
-        text: "The password must contain uppercase characters",
+        text: "The password must contain uppercase letter",
         condition: (text: string) => {
             let haveUppercase = false;
             forEachChar(text, (char) => {
@@ -104,25 +39,13 @@ const rules = [
     {
         text: "The password must contain a number",
         condition: (text: string) => {
-            let number = false;
-            forEachChar(text, (char) => {
-                if (CHARSETS.numbers.includes(char)) {
-                    number = true;
-                }
-            });
-            return number;
+            return count(text, CHARSETS.numbers) != 0;
         },
     },
     {
         text: "The password must contain a special character",
         condition: (text: string) => {
-            let haveSymbol = false;
-            forEachChar(text, (char) => {
-                if (CHARSETS.symbols.includes(char)) {
-                    haveSymbol = true;
-                }
-            });
-            return haveSymbol;
+            return count(text, CHARSETS.symbols) != 0;
         },
     },
     {
@@ -134,17 +57,23 @@ const rules = [
     {
         text: "Password must contain at least one Roman numeral",
         condition: (text: string) => {
-            let haveRomanNumeral = false;
-            forEachChar(text, (char) => {
-                if (CHARSETS.romanNumeral.includes(char)) {
-                    haveRomanNumeral = true;
-                }
-            });
-            return haveRomanNumeral;
+            return count(text, CHARSETS.romanNumeral) != 0;
         },
     },
     {
-        text: "The password must contain as many lowercase and uppercase characters",
+        text: `The sum of all digits must be equal to ${totalDigits}`,
+        condition: (text: string) => {
+            let num = 0;
+            forEachChar(text, (char) => {
+                if (CHARSETS.numbers.includes(char)) {
+                    num += Number(char);
+                }
+            });
+            return num == totalDigits;
+        },
+    },
+    {
+        text: "The password must contain as many lowercase and uppercase letters",
         condition: (text: string) => {
             let upper = 0;
             let lower = 0;
@@ -159,21 +88,9 @@ const rules = [
         },
     },
     {
-        text: "The sum of all digits must be equal to 20",
-        condition: (text: string) => {
-            let num = 0;
-            forEachChar(text, (char) => {
-                if (CHARSETS.numbers.includes(char)) {
-                    num += Number(char);
-                }
-            });
-            return num == 20;
-        },
-    },
-    {
         text: "The password must contain pi",
         condition: (text: string) => {
-            return text.includes(CHARSETS.pi);
+            return text.includes(CHARSETS.pi) || text.includes(CHARSETS.pi2);
         },
     },
     {
@@ -193,8 +110,10 @@ const rules = [
         },
         content: (
             <CreateCaptcha
-                onValue={onCaptchaValue}
-                getCaptchaFixed={getCaptchaFixed}
+                onValue={(value: string) => {
+                    captchaValue = value;
+                }}
+                getCaptchaFixed={() => captchaFixed}
             />
         ),
     },
@@ -209,6 +128,36 @@ const rules = [
         condition: (text: string) => {
             return text.includes(bob);
         },
+    },
+    {
+        condition: (text: string) => {
+            text = text.toLowerCase();
+            return (
+                text.includes(q1[1]) &&
+                text.includes(q2[1]) &&
+                text.includes(q3[1])
+            );
+        },
+        content: (
+            <>
+                <b>The password must contain answers of this quiz:</b>
+                <br />
+                <br />
+                <u>Question 1: </u>
+                <br />
+                {q1[0]}
+                <br />
+                <br />
+                <u>Question 2:</u>
+                <br />
+                {q2[0]}
+                <br />
+                <br />
+                <u>Question 3:</u>
+                <br />
+                {q3[0]}
+            </>
+        ),
     },
 ];
 

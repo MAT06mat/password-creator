@@ -151,3 +151,14 @@ svg {
     stroke-dashoffset: 900;
   }
 }
+
+
+@media only screen and (max-width: 768px) {
+  h1 {
+    font-size: 36px;
+  }
+
+  .password {
+    width: 15em;
+  }
+}
