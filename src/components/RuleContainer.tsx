@@ -62,7 +62,7 @@ function RuleContainer({ passwordText, passwordRef }: Props) {
     return (
         <>
             {finish ? (
-                <>
+                <div className="finish">
                     <svg
                         version="1.1"
                         xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +92,7 @@ function RuleContainer({ passwordText, passwordRef }: Props) {
                     <div className="subtitle">
                         <p>This is the most secure password !</p>
                     </div>
-                </>
+                </div>
             ) : (
                 <ParentRerenderContext.Provider value={forceRerender}>
                     <div className="rule-container">

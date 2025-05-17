@@ -30,7 +30,7 @@ function CreateCaptcha({
                 textColor="#000"
                 noise={true}
                 lines={true}
-                distortion={true}
+                distortion={false}
             />
             <button
                 className="no-padding"

@@ -38,7 +38,10 @@
   margin-top: 2em;
   display: flex;
   flex-direction: column;
-  max-width: 25em;
+  width: 25em;
+  height: calc(100svh - 18em);
+  overflow-y: auto;
+  padding-right: 0.5em;
 }
 
 .rule {
@@ -108,29 +111,29 @@
   text-align: center;
 }
 
-svg {
+.finish svg {
   width: 100px;
   display: block;
   margin: 40px auto 0;
 }
 
-.path {
+.finish .path {
   stroke-dasharray: 1000;
   stroke-dashoffset: 0;
 }
 
-.path.circle {
+.finish .path.circle {
   -webkit-animation: dash .9s ease-in-out;
   animation: dash .9s ease-in-out;
 }
 
-.path.line {
+.finish .path.line {
   stroke-dashoffset: 1000;
   -webkit-animation: dash .9s .35s ease-in-out forwards;
   animation: dash .9s .35s ease-in-out forwards;
 }
 
-.path.check {
+.finish .path.check {
   stroke-dashoffset: -100;
   -webkit-animation: dash-check .9s .35s ease-in-out forwards;
   animation: dash-check .9s .35s ease-in-out forwards;
@@ -180,9 +183,5 @@ svg {
 @media only screen and (max-width: 768px) {
   h1 {
     font-size: 36px;
-  }
-
-  .password {
-    width: 15em;
   }
 }
