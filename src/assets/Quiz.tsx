@@ -23,10 +23,6 @@ export const q2 = RandList([
         "purple",
     ],
     [
-        "What primary color results from the combination of red and yellow?",
-        "orange",
-    ],
-    [
         "Which color replace the color green in the Japanese traffic light?",
         "blue",
     ],

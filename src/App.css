@@ -84,6 +84,30 @@
   padding: 5px;
 }
 
+.colored-div {
+  margin: 1em auto 0.5em;
+  width: 10em;
+  height: 5em;
+  border-radius: 0.5em;
+}
+
+.timer {
+  background-color: #eee;
+  padding: 0.5em;
+  margin: 1em auto 0.5em;
+  border-radius: 0.5em;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  font-size: xx-large;
+  font-weight: 600;
+}
+
+.timer div {
+  width: 1.5em;
+  text-align: center;
+}
+
 svg {
   width: 100px;
   display: block;

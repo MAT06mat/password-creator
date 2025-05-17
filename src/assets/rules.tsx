@@ -1,15 +1,25 @@
 import CreateCaptcha from "./CreateCaptcha";
 import { q1, q2, q3 } from "./Quiz";
+import Timer from "./Timer";
+import { toBinaryString } from "./tools/binary";
 import { containEmojis, count, forEachChar } from "./tools/chars";
 import { CHARSETS } from "./tools/charsets";
-import { RandInt, RandList } from "./tools/random";
+import { MultipleRandListSring, RandInt, RandList } from "./tools/random";
 import { sumRomanInString } from "./tools/roman";
 
 let captchaValue = "qpzfhnsdk";
 let captchaFixed = false;
 
-const totalDigits = RandInt(20, 25);
+let timerFinished = false;
+
+const totalDigits = RandInt(40, 50);
 const bob = RandList(["¯\\_(ツ)_/¯", "(╯°□°)╯︵┻┻", "┬─┬ノ( º _ ºノ)"]);
+const cm = RandInt(10, 98);
+const inch = Math.round(cm * 0.3937007874);
+const color = "#" + MultipleRandListSring("abcdef123", 6);
+const textForBinary = MultipleRandListSring(CHARSETS.uppercase, 8);
+const textToBinary = toBinaryString(textForBinary);
+const maxChar = 70;
 
 const rules = [
     {
@@ -158,6 +168,51 @@ const rules = [
                 {q3[0]}
             </>
         ),
+    },
+    {
+        text: `The password must contain the conversion from ${cm} centimeter to inches (rounded to the nearest integer)`,
+        condition: (text: string) => {
+            return text.includes(String(inch));
+        },
+    },
+    {
+        text: "You must be wait 3 minutes to continue",
+        condition: () => {
+            return timerFinished;
+        },
+        content: <Timer min={3} onFinish={() => (timerFinished = true)} />,
+    },
+    {
+        text: `The password must contain the traduction of ${textToBinary}`,
+        condition: (text: string) => {
+            return text.includes(textForBinary);
+        },
+    },
+    {
+        text: "The password must be stronger 💪",
+        condition: (text: string) => {
+            return count(text, "💪") >= 6;
+        },
+    },
+    {
+        text: "The password must contain the hexadecimal color of this box",
+        condition: (text: string) => {
+            return text.toLowerCase().includes(color);
+        },
+        content: (
+            <div
+                className="colored-div"
+                style={{
+                    backgroundColor: color,
+                }}
+            ></div>
+        ),
+    },
+    {
+        text: `The password must be at most ${maxChar} characters long`,
+        condition: (text: string) => {
+            return text.length <= maxChar;
+        },
     },
 ];
 

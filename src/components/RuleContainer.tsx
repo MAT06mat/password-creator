@@ -2,6 +2,7 @@ import { ReactNode, useState } from "react";
 import Rule from "./Rule";
 import rules from "../assets/rules";
 import { AnimatePresence } from "framer-motion";
+import { ParentRerenderContext } from "./RuleContainerContext";
 
 interface rule {
     text?: string;
@@ -19,6 +20,9 @@ interface Props {
 function RuleContainer({ passwordText, passwordRef }: Props) {
     const [finish, setFinish] = useState(false);
     const [displayRules, setDisplayRules] = useState<rule[]>([]);
+
+    const [count, setCount] = useState(0);
+    const forceRerender = () => setCount(count + 1);
 
     // Check if all rules are completed
     let isAllRulesCompleted = true;
@@ -90,22 +94,24 @@ function RuleContainer({ passwordText, passwordRef }: Props) {
                     </div>
                 </>
             ) : (
-                <div className="rule-container">
-                    <AnimatePresence>
-                        {displayRules.map((rule: rule) => {
-                            return (
-                                <Rule
-                                    number={rule.number}
-                                    text={rule.text}
-                                    completed={rule.completed}
-                                    key={rule.number}
-                                >
-                                    {rule.content}
-                                </Rule>
-                            );
-                        })}
-                    </AnimatePresence>
-                </div>
+                <ParentRerenderContext.Provider value={forceRerender}>
+                    <div className="rule-container">
+                        <AnimatePresence>
+                            {displayRules.map((rule: rule) => {
+                                return (
+                                    <Rule
+                                        number={rule.number}
+                                        text={rule.text}
+                                        completed={rule.completed}
+                                        key={rule.number}
+                                    >
+                                        {rule.content}
+                                    </Rule>
+                                );
+                            })}
+                        </AnimatePresence>
+                    </div>
+                </ParentRerenderContext.Provider>
             )}
         </>
     );
