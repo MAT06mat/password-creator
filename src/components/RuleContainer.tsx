@@ -21,6 +21,9 @@ function RuleContainer({ passwordText, passwordRef }: Props) {
     const [finish, setFinish] = useState(false);
     const [displayRules, setDisplayRules] = useState<rule[]>([]);
 
+    /*const [displayRules, setDisplayRules] = useState<rule[]>(rules);
+    rules.filter((rule: rule) => false);*/
+
     const [count, setCount] = useState(0);
     const forceRerender = () => setCount(count + 1);
 

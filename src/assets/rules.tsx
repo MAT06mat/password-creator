@@ -19,7 +19,7 @@ const inch = Math.round(cm * 0.3937007874);
 const color = "#" + MultipleRandListSring("abcdef123", 6);
 const textForBinary = MultipleRandListSring(CHARSETS.uppercase, 8);
 const textToBinary = toBinaryString(textForBinary);
-const maxChar = 70;
+const maxChar = 74;
 
 const rules = [
     {
@@ -71,6 +71,23 @@ const rules = [
         },
     },
     {
+        text: "The password must contain one of our sponsors",
+        condition: (text: string) => {
+            return (
+                text.includes("Google") ||
+                text.includes("LEGO") ||
+                text.includes("Spotify")
+            );
+        },
+        content: (
+            <div className="sponsors">
+                <img src="/Google.svg" alt="Google" className="google" />
+                <img src="/LEGO.svg" alt="LEGO" className="lego" />
+                <img src="/Spotify.svg" alt="Spotify" className="spotify" />
+            </div>
+        ),
+    },
+    {
         text: `The sum of all digits must be equal to ${totalDigits}`,
         condition: (text: string) => {
             let num = 0;
@@ -80,27 +97,6 @@ const rules = [
                 }
             });
             return num == totalDigits;
-        },
-    },
-    {
-        text: "The password must contain as many lowercase and uppercase letters",
-        condition: (text: string) => {
-            let upper = 0;
-            let lower = 0;
-            forEachChar(text, (char) => {
-                if (CHARSETS.uppercase.includes(char)) {
-                    upper += 1;
-                } else if (CHARSETS.lowercase.includes(char)) {
-                    lower += 1;
-                }
-            });
-            return upper === lower && upper != 0;
-        },
-    },
-    {
-        text: "The password must contain pi",
-        condition: (text: string) => {
-            return text.includes(CHARSETS.pi) || text.includes(CHARSETS.pi2);
         },
     },
     {
@@ -128,15 +124,21 @@ const rules = [
         ),
     },
     {
-        text: "The sum of all Roman numerals must be equal to 42",
+        text: "The password must contain pi",
         condition: (text: string) => {
-            return sumRomanInString(text) == 42;
+            return text.includes(CHARSETS.pi) || text.includes(CHARSETS.pi2);
         },
     },
     {
         text: `The password must contain bob ${bob}`,
         condition: (text: string) => {
             return text.includes(bob);
+        },
+    },
+    {
+        text: "The sum of all Roman numerals must be equal to 42",
+        condition: (text: string) => {
+            return sumRomanInString(text) == 42;
         },
     },
     {
@@ -186,6 +188,21 @@ const rules = [
         text: `The password must contain the traduction of ${textToBinary}`,
         condition: (text: string) => {
             return text.includes(textForBinary);
+        },
+    },
+    {
+        text: "The password must contain as many lowercase and uppercase letters",
+        condition: (text: string) => {
+            let upper = 0;
+            let lower = 0;
+            forEachChar(text, (char) => {
+                if (CHARSETS.uppercase.includes(char)) {
+                    upper += 1;
+                } else if (CHARSETS.lowercase.includes(char)) {
+                    lower += 1;
+                }
+            });
+            return upper === lower && upper != 0;
         },
     },
     {

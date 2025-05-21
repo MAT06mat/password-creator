@@ -141,9 +141,27 @@
   outline: none !important;
 }
 
-button:focus,
-button:focus-visible {
+.fullscreen-button:focus,
+.fullscreen-button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.sponsors {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  align-items: center;
+  padding: 1em 0 0.5em 0;
+}
+
+.sponsors img {
+  width: calc(100% - 2em);
+  margin: 0 auto;
+  height: auto;
+}
+
+.sponsors img.google {
+  width: calc(100% - 1.5em);
 }
 
 .finish svg {
