@@ -6,6 +6,7 @@
   align-items: center;
   height: 100%;
   width: 100%;
+  padding: 0 1em;
 }
 
 .subtitle {
@@ -15,8 +16,10 @@
 
 .password {
   white-space: anywhere;
-  border-radius: 1em;
-  width: 22.5em;
+  border-radius: 0.5em;
+  width: calc(100% - 2.4em - 2px);
+  max-width: 22.5em;
+  max-height: 50dvh;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
@@ -27,7 +30,7 @@
   resize: none;
   overflow-y: hidden;
   scroll-padding-block: 0;
-  transition: all ease 1s;
+  transition: height ease 0.5s;
   margin-bottom: 2em;
   flex-shrink: 0;
 }
@@ -40,6 +43,7 @@
 .password.fullscreen {
   margin-top: 1em;
   margin-bottom: 1em;
+  border-radius: 1em;
 }
 
 .rule-container {
@@ -56,13 +60,17 @@
 }
 
 .rule {
-  width: calc(22.5em - 1.6px);
+  width: 100%;
+  max-width: 25em;
   display: grid;
   transition: all ease-in-out 0.6s;
   background-color: #ffb3b3;
   border: 2px solid #ff4b4b;
   border-radius: 1em;
   text-align: left;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .wrapped-rule {
@@ -127,7 +135,7 @@
   position: absolute;
   bottom: 1em;
   right: 1em;
-  background-color: #fff;
+  background-color: transparent;
   padding: 0.5em;
   border: none;
   outline: none !important;
