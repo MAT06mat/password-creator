@@ -4,13 +4,14 @@ import TextareaAutosize from "react-textarea-autosize";
 interface Props {
     handlePassword: FormEventHandler<HTMLTextAreaElement>;
     ref?: RefObject<HTMLTextAreaElement>;
+    fullScreen: boolean;
 }
 
-function Password({ handlePassword, ref }: Props) {
+function Password({ handlePassword, ref, fullScreen }: Props) {
     const [value, setValue] = useState("");
     return (
         <TextareaAutosize
-            className="password"
+            className={fullScreen ? "password fullscreen" : "password"}
             onInput={(e) => {
                 handlePassword(e);
             }}

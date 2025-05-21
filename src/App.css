@@ -1,8 +1,11 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 
 .subtitle {
@@ -12,9 +15,8 @@
 
 .password {
   white-space: anywhere;
-  border-radius: 8px;
-  width: 100%;
-  max-width: 22.5em;
+  border-radius: 1em;
+  width: 22.5em;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
@@ -26,6 +28,8 @@
   overflow-y: hidden;
   scroll-padding-block: 0;
   transition: all ease 1s;
+  margin-bottom: 2em;
+  flex-shrink: 0;
 }
 
 .password:disabled {
@@ -33,18 +37,26 @@
   border-color: #7db15c;
 }
 
+.password.fullscreen {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
 .rule-container {
-  margin: auto;
-  margin-top: 2em;
   display: flex;
   flex-direction: column;
-  width: 25em;
-  height: calc(100svh - 18em);
   overflow-y: auto;
-  padding-right: 0.5em;
+  height: 0fr;
+  width: 100%;
+  align-items: center;
+}
+
+.rule-container::-webkit-scrollbar {
+  display: none;
 }
 
 .rule {
+  width: calc(22.5em - 1.6px);
   display: grid;
   transition: all ease-in-out 0.6s;
   background-color: #ffb3b3;
@@ -109,6 +121,21 @@
 .timer div {
   width: 1.5em;
   text-align: center;
+}
+
+.fullscreen-button {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  background-color: #fff;
+  padding: 0.5em;
+  border: none;
+  outline: none !important;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
 }
 
 .finish svg {

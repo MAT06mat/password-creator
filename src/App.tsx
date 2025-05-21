@@ -2,9 +2,11 @@ import { useRef, useState } from "react";
 import "./App.css";
 import Password from "./components/Password";
 import RuleContainer from "./components/RuleContainer";
+import FullScreenButton from "./components/FullScreenButton";
 
 function App() {
     const [start, setStart] = useState(false);
+    const [fullScreen, setFullScreen] = useState(false);
     const [passwordText, setPasswordText] = useState("");
     const passwordRef = useRef<HTMLTextAreaElement>(
         document.createElement("textarea")
@@ -16,16 +18,23 @@ function App() {
 
     return (
         <>
-            <h1>Password-Creator</h1>
+            <h1 style={{ display: fullScreen ? "none" : "inline" }}>
+                Password-Creator
+            </h1>
             {start ? (
                 <>
                     <Password
                         handlePassword={handlePassword}
                         ref={passwordRef}
+                        fullScreen={fullScreen}
                     />
                     <RuleContainer
                         passwordText={passwordText}
                         passwordRef={passwordRef}
+                    />
+                    <FullScreenButton
+                        fullScreen={fullScreen}
+                        setFullScreen={setFullScreen}
                     />
                 </>
             ) : (
