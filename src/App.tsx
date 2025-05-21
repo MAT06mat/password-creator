@@ -31,6 +31,7 @@ function App() {
                     <RuleContainer
                         passwordText={passwordText}
                         passwordRef={passwordRef}
+                        setFullScreen={setFullScreen}
                     />
                     <FullScreenButton
                         fullScreen={fullScreen}

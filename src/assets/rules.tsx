@@ -6,6 +6,7 @@ import { containEmojis, count, forEachChar } from "./tools/chars";
 import { CHARSETS } from "./tools/charsets";
 import { MultipleRandListSring, RandInt, RandList } from "./tools/random";
 import { sumRomanInString } from "./tools/roman";
+import testEmojisTime from "./tools/testEmojisTime";
 
 let captchaValue = "qpzfhnsdk";
 let captchaFixed = false;
@@ -19,7 +20,7 @@ const inch = Math.round(cm * 0.3937007874);
 const color = "#" + MultipleRandListSring("abcdef123", 6);
 const textForBinary = MultipleRandListSring(CHARSETS.uppercase, 8);
 const textToBinary = toBinaryString(textForBinary);
-const maxChar = 74;
+const maxChar = 75;
 
 const rules = [
     {
@@ -224,6 +225,10 @@ const rules = [
                 }}
             ></div>
         ),
+    },
+    {
+        text: "The password must contain the current time (minutes) in emojis",
+        condition: testEmojisTime,
     },
     {
         text: `The password must be at most ${maxChar} characters long`,

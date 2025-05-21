@@ -15,9 +15,10 @@ interface rule {
 interface Props {
     passwordText: string;
     passwordRef: React.RefObject<HTMLTextAreaElement>;
+    setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function RuleContainer({ passwordText, passwordRef }: Props) {
+function RuleContainer({ passwordText, passwordRef, setFullScreen }: Props) {
     const [finish, setFinish] = useState(false);
     const [displayRules, setDisplayRules] = useState<rule[]>([]);
 
@@ -58,6 +59,9 @@ function RuleContainer({ passwordText, passwordRef }: Props) {
             if (!finish) {
                 setFinish(true);
                 passwordRef.current.disabled = true;
+                setTimeout(() => {
+                    setFullScreen(false);
+                });
             }
         }
     }
