@@ -73,7 +73,9 @@ function RuleContainer({
     }
 
     if (displayRules.length > 5) {
-        setfullScreenButtonDisable(false);
+        setTimeout(() => {
+            setfullScreenButtonDisable(false);
+        });
     }
 
     return (
