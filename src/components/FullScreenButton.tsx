@@ -1,12 +1,17 @@
 interface Props {
     fullScreen: boolean;
     setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
+    disable?: boolean;
 }
 
-function FullScreenButton({ fullScreen, setFullScreen }: Props) {
+function FullScreenButton({ fullScreen, setFullScreen, disable }: Props) {
     const handleFullScreen = () => {
         setFullScreen((prev) => !prev);
     };
+
+    if (disable) {
+        return null;
+    }
 
     return (
         <button className="fullscreen-button" onClick={handleFullScreen}>

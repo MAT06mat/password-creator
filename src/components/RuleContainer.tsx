@@ -16,9 +16,15 @@ interface Props {
     passwordText: string;
     passwordRef: React.RefObject<HTMLTextAreaElement>;
     setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
+    setfullScreenButtonDisable: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function RuleContainer({ passwordText, passwordRef, setFullScreen }: Props) {
+function RuleContainer({
+    passwordText,
+    passwordRef,
+    setFullScreen,
+    setfullScreenButtonDisable,
+}: Props) {
     const [finish, setFinish] = useState(false);
     const [displayRules, setDisplayRules] = useState<rule[]>([]);
 
@@ -64,6 +70,10 @@ function RuleContainer({ passwordText, passwordRef, setFullScreen }: Props) {
                 });
             }
         }
+    }
+
+    if (displayRules.length > 5) {
+        setfullScreenButtonDisable(false);
     }
 
     return (

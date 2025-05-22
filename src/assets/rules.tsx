@@ -82,9 +82,9 @@ const rules = [
         },
         content: (
             <div className="sponsors">
-                <img src="/Google.svg" alt="Google" className="google" />
-                <img src="/LEGO.svg" alt="LEGO" className="lego" />
-                <img src="/Spotify.svg" alt="Spotify" className="spotify" />
+                <img src="./Google.svg" alt="Google" className="google" />
+                <img src="./LEGO.svg" alt="LEGO" className="lego" />
+                <img src="./Spotify.svg" alt="Spotify" className="spotify" />
             </div>
         ),
     },

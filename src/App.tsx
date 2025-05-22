@@ -6,6 +6,8 @@ import FullScreenButton from "./components/FullScreenButton";
 
 function App() {
     const [start, setStart] = useState(false);
+    const [fullScreenButtonDisable, setfullScreenButtonDisable] =
+        useState(true);
     const [fullScreen, setFullScreen] = useState(false);
     const [passwordText, setPasswordText] = useState("");
     const passwordRef = useRef<HTMLTextAreaElement>(
@@ -32,10 +34,12 @@ function App() {
                         passwordText={passwordText}
                         passwordRef={passwordRef}
                         setFullScreen={setFullScreen}
+                        setfullScreenButtonDisable={setfullScreenButtonDisable}
                     />
                     <FullScreenButton
                         fullScreen={fullScreen}
                         setFullScreen={setFullScreen}
+                        disable={fullScreenButtonDisable}
                     />
                 </>
             ) : (
