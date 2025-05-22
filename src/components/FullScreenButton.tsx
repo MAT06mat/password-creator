@@ -14,7 +14,10 @@ function FullScreenButton({ fullScreen, setFullScreen, disable }: Props) {
     }
 
     return (
-        <button className="fullscreen-button" onClick={handleFullScreen}>
+        <button
+            className="fullscreen-button no-focus"
+            onClick={handleFullScreen}
+        >
             {fullScreen ? (
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

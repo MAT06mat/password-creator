@@ -109,6 +109,7 @@
 
 .colored-div {
   margin: 1em auto 0.5em;
+  display: block;
   width: 10em;
   height: 5em;
   border-radius: 0.5em;
@@ -141,9 +142,9 @@
   outline: none !important;
 }
 
-.fullscreen-button:focus,
-.fullscreen-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.no-focus:focus,
+.no-focus:focus-visible {
+  outline: 4px none -webkit-focus-ring-color !important;
 }
 
 .sponsors {

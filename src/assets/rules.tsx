@@ -4,6 +4,7 @@ import Timer from "./Timer";
 import { toBinaryString } from "./tools/binary";
 import { containEmojis, count, forEachChar } from "./tools/chars";
 import { CHARSETS } from "./tools/charsets";
+import hexToRGB from "./tools/hexToRBG";
 import { MultipleRandListSring, RandInt, RandList } from "./tools/random";
 import { sumRomanInString } from "./tools/roman";
 import testEmojisTime from "./tools/testEmojisTime";
@@ -218,12 +219,16 @@ const rules = [
             return text.toLowerCase().includes(color);
         },
         content: (
-            <div
-                className="colored-div"
+            <button
+                onClick={() => {
+                    navigator.clipboard.writeText(hexToRGB(color));
+                    alert("Copied to clipboard");
+                }}
+                className="colored-div no-focus"
                 style={{
                     backgroundColor: color,
                 }}
-            ></div>
+            />
         ),
     },
     {
