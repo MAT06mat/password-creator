@@ -4,6 +4,7 @@ import Timer from "./Timer";
 import { toBinaryString } from "./tools/binary";
 import { containEmojis, count, forEachChar } from "./tools/chars";
 import { CHARSETS } from "./tools/charsets";
+import bestMove from "./tools/chess";
 import hexToRGB from "./tools/hexToRBG";
 import { MultipleRandListSring, RandInt, RandList } from "./tools/random";
 import { sumRomanInString } from "./tools/roman";
@@ -14,14 +15,14 @@ let captchaFixed = false;
 
 let timerFinished = false;
 
-const totalDigits = RandInt(40, 50);
+const totalDigits = RandInt(45, 55);
 const bob = RandList(["¯\\_(ツ)_/¯", "(╯°□°)╯︵┻┻", "┬─┬ノ( º _ ºノ)"]);
 const cm = RandInt(10, 98);
 const inch = Math.round(cm * 0.3937007874);
 const color = "#" + MultipleRandListSring("abcdef123", 6);
 const textForBinary = MultipleRandListSring(CHARSETS.uppercase, 8);
 const textToBinary = toBinaryString(textForBinary);
-const maxChar = 75;
+const maxChar = 80;
 
 const rules = [
     {
@@ -83,9 +84,17 @@ const rules = [
         },
         content: (
             <div className="sponsors">
-                <img src="./Google.svg" alt="Google" className="google" />
-                <img src="./LEGO.svg" alt="LEGO" className="lego" />
-                <img src="./Spotify.svg" alt="Spotify" className="spotify" />
+                <img
+                    src="./sponsors/Google.svg"
+                    alt="Google"
+                    className="google"
+                />
+                <img src="./sponsors/LEGO.svg" alt="LEGO" className="lego" />
+                <img
+                    src="./sponsors/Spotify.svg"
+                    alt="Spotify"
+                    className="spotify"
+                />
             </div>
         ),
     },
@@ -234,6 +243,18 @@ const rules = [
     {
         text: "The password must contain the current time (minutes) in emojis",
         condition: testEmojisTime,
+    },
+    {
+        text: "The password must contain the best move in algebraic notation",
+        condition: (text: string) => {
+            return text.includes(bestMove.move);
+        },
+        content: (
+            <div className="chessboard">
+                <b>Find the best move for white !</b>
+                <img src={bestMove.image} alt="" />
+            </div>
+        ),
     },
     {
         text: `The password must be at most ${maxChar} characters long`,
