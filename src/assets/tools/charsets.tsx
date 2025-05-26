@@ -3,6 +3,7 @@ export const CHARSETS = {
     symbols: "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~",
     lowercase: "abcdefghijklmnopqrstuvwxyz",
     uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    uppercasenoroman: "ABEFGHIJKNOPQRSTUWYZ",
     pi: "π",
     pi2: "3.14",
     romanNumeral: "IVXLCDM",
