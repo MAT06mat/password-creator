@@ -20,7 +20,7 @@ const bob = RandList(["¯\\_(ツ)_/¯", "(╯°□°)╯︵┻┻", "┬─┬�
 const cm = RandInt(10, 98);
 const inch = Math.round(cm * 0.3937007874);
 const color = "#" + MultipleRandListSring("abcdef123", 6);
-const textForBinary = MultipleRandListSring(CHARSETS.uppercase, 8);
+const textForBinary = MultipleRandListSring(CHARSETS.uppercasenoroman, 8);
 const textToBinary = toBinaryString(textForBinary);
 const maxChar = 80;
 
